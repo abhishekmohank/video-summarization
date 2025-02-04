@@ -1,20 +1,20 @@
 import streamlit as st
 from phi.agent import Agent
+from phi.model.google import Gemini
 from phi.tools.duckduckgo import DuckDuckGo
+from google.generativeai import upload_file, get_file
+import google.generativeai as genai
+import time
 import os
 import tempfile
-import time
 from dotenv import load_dotenv
-from groq import Groq
-
 load_dotenv()
-
 # Load API key from secrets
-groq_api_key = os.getenv("GROQ_API_KEY")
-if groq_api_key:
-    client = Groq(api_key=groq_api_key)
+api_key = os.getenv("GOOGLE_API_KEY")
+if api_key:
+    genai.configure(api_key=api_key)
 else:
-    st.error("GROQ API key not found. Please check your configuration.")
+    st.error("API key not found. Please check your configuration.")
 
 # Set Page Configuration
 st.set_page_config(page_title="CineMind: AI-Driven Contextual Video Summarization", page_icon="🎥", layout="wide")
@@ -39,13 +39,18 @@ st.markdown('<p class="subtitle">Transform lengthy videos into concise summaries
 # Author Section
 st.markdown("### 🔥 Built with passion by **Muhammad Shoaib** 🚀")
 
-# Cache DuckDuckGo Initialization
+# Cache Agent Initialization
 @st.cache_resource()
-def initialize_duckduckgo():
-    return DuckDuckGo()
+def initialize_agent():
+    return Agent(
+        name="AI Video Summarizer",
+        model=Gemini(id="gemini-2.0-flash-exp"),
+        tools=[DuckDuckGo()],
+        markdown=True
+    )
 
-# Initialize tools
-search_tool = initialize_duckduckgo()
+# Initialize agent
+multimodel_agent = initialize_agent()
 
 # File Uploader with Expander for Clean UI
 with st.expander("📤 Upload Video File (mp4, mov, avi)"):
@@ -66,30 +71,32 @@ if video_file:
         else:
             try:
                 with st.spinner("🚀 Processing video and gathering insights..."):
+                    processed_video = upload_file(video_path)
                     
-                    # Simulated progress bar
-                    progress_bar = st.progress(0)
+                    # Real-time progress update
+                    st.info("Processing the video, please wait...")  
+                    progress_bar = st.progress(0)  
+
                     for i in range(100):  
                         time.sleep(0.02)  
                         progress_bar.progress(i + 1)
+
                     
-                    # Generating response using Groq API
+                    while processed_video.state.name == "PROCESSING":
+                        time.sleep(1)
+                        processed_video = get_file(processed_video.name)
+                    
                     analysis_prompt = f"""
-                    Analyze the following video content and answer the user's query:
+                    Analyze the uploaded video for content and context. Respond to the following query using video insights and supplementary web search:
                     {user_query}
-                    Supplement the response with relevant insights.
+                    Provide a detailed, user-friendly, and actionable response.
                     """
                     
-                    chat_completion = client.chat.completions.create(
-                        messages=[{"role": "user", "content": analysis_prompt}],
-                        model="deepseek-r1-distill-llama-70b",
-                    )
-                    
-                    response = chat_completion.choices[0].message.content
+                    response = multimodel_agent.run(analysis_prompt, videos=[processed_video])
                     
                     # Display result in an interactive container
                     st.markdown("### 📊 Analysis Result")
-                    st.markdown(f'<div class="result-container">{response}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="result-container">{response.content}</div>', unsafe_allow_html=True)
             
             except Exception as error:
                 st.error(f"⚠️ An error occurred: {error}")
