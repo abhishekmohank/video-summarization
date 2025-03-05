@@ -17,7 +17,7 @@ else:
     st.error("API key not found. Please check your configuration.")
 
 # Set Page Configuration
-st.set_page_config(page_title="CineMind: AI-Driven Contextual Video Summarization", page_icon="🎥", layout="wide")
+st.set_page_config(page_title="Video Summarization", page_icon="📹", layout="wide")
 
 # Custom Styling
 st.markdown(
@@ -33,11 +33,11 @@ st.markdown(
 )
 
 # Display Title & Subtitle
-st.markdown('<h1 class="title">CineMind: AI-Driven Contextual Video Summarization 🎬</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="title"> Video Summarization 🎬</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Transform lengthy videos into concise summaries using AI.</p>', unsafe_allow_html=True)
 
 # Author Section
-st.markdown("### 🔥 Built with passion by **Muhammad Shoaib** 🚀")
+# st.markdown(" abhishek ")
 
 # Cache Agent Initialization
 @st.cache_resource()

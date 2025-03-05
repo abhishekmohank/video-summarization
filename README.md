@@ -1,5 +1,5 @@
 ---
-title: CineMind Video Summarizer
+title:  Video Summarizer
 emoji: 🔥
 colorFrom: red
 colorTo: gray
