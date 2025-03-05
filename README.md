@@ -1,5 +1,5 @@
 ---
-title:  Video Summarizer
+Title:  Video Summarizer
 emoji: 🔥
 colorFrom: red
 colorTo: gray
