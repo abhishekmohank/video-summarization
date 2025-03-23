@@ -1,5 +1,4 @@
- 
- import streamlit as st
+import streamlit as st
 from phi.agent import Agent
 from phi.model.google import Gemini
 from phi.tools.duckduckgo import DuckDuckGo
@@ -71,7 +70,7 @@ if video_file:
             st.warning("Please enter a question to analyze the video.")
         else:
             try:
-                with st.spinner("🚀 Processing video and gathering insights..."):
+                with st.spinner(" Processing video and gathering insights..."):
                     processed_video = upload_file(video_path)
                     
                     # Real-time progress update
