@@ -102,6 +102,8 @@ streamlit run app.py
 ```
 5. Upload a video or paste a link → Wait for processing → Get your summary ✅
 
+---
+
 ##🔐 Configuration
 
 Environment variables required:
@@ -110,6 +112,8 @@ GOOGLE_API_KEY=your_google_api_key
 
 ```
 Make sure you do not commit your .env file.
+
+---
 
 ##⚠️ Limitations & Future Work
 
@@ -129,6 +133,7 @@ Make sure you do not commit your .env file.
     - Highlight video segments linked to summaries
     
     - Multi-language support
+---
 
 
 ##🤝 Contributing
@@ -139,6 +144,7 @@ Contributions are welcome!
 - Push branch (git push origin feature/xyz)
 - Open a Pull Request
 
+---
 
 ##📜 License
 This project is licensed under the MIT License.
