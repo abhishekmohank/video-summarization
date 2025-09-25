@@ -1,9 +1,18 @@
+
+👉 Notice I closed it with **```** at the end.  
+If you miss that closing line, then everything below stays inside the grey code block.  
+
+---
+
+Here’s the **fixed README (copy-paste ready)** with all code blocks properly closed:
+
+```markdown
 # 🎥 Video Summarizer  
 
 A Streamlit-based web application that generates concise **summaries of videos** using **Google Gemini Generative AI**.  
 Upload a video or provide a link, and the system extracts the key insights, summarizes the content, and presents it in a clean interface.  
 
-🌐 **Live Demo on Render**: [Video Summarizer](https://video-summarization-xw53.onrender.com/)  
+🌐 **Live Demo on Render**: [Video Summarizer](https://video-summarization.onrender.com)  
 
 ---
 
