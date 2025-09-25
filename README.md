@@ -84,7 +84,7 @@ pip install -r requirements.txt
 
 ```
 
-##🚀 Usage
+## 🚀 Usage
 
 1. Create a .env file in the root folder and add your API key:
 ```bash
@@ -104,7 +104,7 @@ streamlit run app.py
 
 ---
 
-##🔐 Configuration
+## 🔐 Configuration
 
 Environment variables required:
 ```bash
@@ -115,7 +115,7 @@ Make sure you do not commit your .env file.
 
 ---
 
-##⚠️ Limitations & Future Work
+## ⚠️ Limitations & Future Work
 
 - Processing long videos may take time
 - Summarization quality depends on Gemini model
@@ -136,7 +136,7 @@ Make sure you do not commit your .env file.
 ---
 
 
-##🤝 Contributing
+## 🤝 Contributing
 Contributions are welcome!
 - Fork the repo
 - Create your feature branch (git checkout -b feature/xyz)
@@ -146,5 +146,6 @@ Contributions are welcome!
 
 ---
 
-##📜 License
+## 📜 License
+
 This project is licensed under the MIT License.
